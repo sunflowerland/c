@@ -50,8 +50,8 @@ function renderTable(data, containerId) {
           <th>#</th>
           <th>Item</th>
           <th>Seed Cost (flower)</th>
-          <th>Sell Price (flower)</th>
-          <th>Profit/Pick (flower)</th>
+          <th>Marketplace Price (flower)</th>
+          <th>Profit/pick (flower)</th>
           <th>Time (s)</th>
           <th>Profit/min (flower)</th>
         </tr>
@@ -183,15 +183,5 @@ document.querySelectorAll("#settingsPanel input").forEach((input) => {
     if (e.key === "Enter") loadData();
   });
 });
-
-// 📝 Append notes at the bottom of settings panel
-const notes = document.createElement("div");
-notes.className = "mt-3 small text-muted border-top pt-2";
-notes.innerHTML = `
-  <strong>Notes:</strong><br>
-  • Default price of 1000 coins equals <b>0.5 flowers</b>, based on average delivery rate.<br>
-  • Crop/Fruit multipliers can be used to calculate profit according to the number of plots.
-`;
-panel.appendChild(notes);
 
 loadData();
