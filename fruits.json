@@ -1,0 +1,8 @@
+[
+  { "name": "Tomato", "price": 5, "seconds": 7200 },
+  { "name": "Lemon", "price": 15, "seconds": 14400 },
+  { "name": "Blueberry", "price": 30, "seconds": 21600 },
+  { "name": "Orange", "price": 50, "seconds": 28800 },
+  { "name": "Apple", "price": 70, "seconds": 43200 },
+  { "name": "Banana", "price": 70, "seconds": 43200 }
+]

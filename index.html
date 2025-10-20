@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Sunflower Land Profit Calculator</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      /* 🌿 Base Style */
+      body {
+        background: #f1f3f4;
+        font-family: "Poppins", sans-serif;
+        color: #333;
+      }
+
+      .navbar {
+        background-color: #6c757d !important; /* abu-abu netral */
+      }
+
+      .navbar-brand {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+
+      .btn-light {
+        background-color: #e9ecef;
+        color: #333;
+        border: none;
+      }
+
+      .btn-light:hover {
+        background-color: #dee2e6;
+      }
+
+      /* 🧾 Cards */
+      .card {
+        border: none;
+        border-radius: 1rem;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+        background-color: #ffffff;
+      }
+
+      .card h4 {
+        color: #495057;
+      }
+
+      /* 📊 Table */
+      .table th {
+        background-color: #adb5bd;
+        color: white;
+      }
+
+      .profit-positive {
+        color: #2e7d32; /* hijau lembut */
+        font-weight: 600;
+      }
+
+      /* ⚙️ Settings */
+      #settingsPanel {
+        display: none;
+        background: #f8f9fa;
+        border-radius: 12px;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+      }
+
+      .notes {
+        font-size: 0.85rem;
+        color: #6c757d;
+      }
+
+      hr {
+        border-top: 1px solid #dee2e6;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- 🔹 Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark mb-4">
+      <div class="container d-flex justify-content-between">
+        <a class="navbar-brand fw-bold" href="#">
+          🌻 Sunflower Land Profit Calculator
+        </a>
+        <button id="toggleSettings" class="btn btn-light btn-sm">
+          ⚙️ Settings
+        </button>
+      </div>
+    </nav>
+
+    <!-- 🔹 Main Container -->
+    <div class="container pb-5">
+      <!-- ⚙️ Settings Panel -->
+      <div id="settingsPanel" class="card p-3 mb-4">
+        <h5 class="mb-3">Settings</h5>
+
+        <div class="row g-3 mb-3">
+          <div class="col-md-4">
+            <label class="form-label">Flower per 1000 coin</label>
+            <input
+              id="coinRate"
+              type="number"
+              class="form-control"
+              value="0.5"
+              step="0.1"
+            />
+          </div>
+          <div class="col-md-4">
+            <label class="form-label">Crop Multiplier</label>
+            <input
+              id="cropMult"
+              type="number"
+              class="form-control"
+              value="1"
+              step="0.1"
+            />
+          </div>
+          <div class="col-md-4">
+            <label class="form-label">Fruit Multiplier</label>
+            <input
+              id="fruitMult"
+              type="number"
+              class="form-control"
+              value="1"
+              step="0.1"
+            />
+          </div>
+        </div>
+
+        <hr />
+
+        <h6>Modifiers</h6>
+        <div id="modifiersContainer"></div>
+        <button id="addModifier" class="btn btn-outline-secondary btn-sm mt-2">
+          ➕ Add Modifier
+        </button>
+
+        <div class="text-end mt-3">
+          <button id="recalc" class="btn btn-secondary">Recalculate</button>
+        </div>
+
+        <!-- 📝 Notes -->
+        <div class="notes mt-3">
+          <p>• Default 1000 coin = 0.5 flower (based on delivery averages)</p>
+          <p>
+            • Crop/Fruit multiplier is used to calculate profit per total plots
+          </p>
+        </div>
+      </div>
+
+      <!-- 🌾 Crop Rankings -->
+      <div class="card p-3 mb-4">
+        <h4 class="text-center mb-3">Crop Profit Rankings</h4>
+        <div id="cropTableContainer" class="text-center">
+          <div class="spinner-border text-secondary"></div>
+        </div>
+      </div>
+
+      <!-- 🍎 Fruit Rankings -->
+      <div class="card p-3">
+        <h4 class="text-center mb-3">Fruit Profit Rankings</h4>
+        <div id="fruitTableContainer" class="text-center">
+          <div class="spinner-border text-secondary"></div>
+        </div>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
