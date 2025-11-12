@@ -50,8 +50,21 @@ function calculateProfit(seeds, prices, coinRate, multiplier, modifiers) {
       seconds: Math.round(modSeconds),
     });
   }
-
   results.sort((a, b) => b.profitPerMin - a.profitPerMin);
+
+  for (let i = 0; i < results.length - 1; i++) {
+    const current = results[i];
+    const next = results[i + 1];
+
+    const diffProfit =
+      current.profit - next.profit * (current.seconds / next.seconds);
+    const nextProfitPerSec = next.profit / next.seconds;
+
+    const toleranceSec = diffProfit / nextProfitPerSec;
+    current.toleranceTime = toleranceSec;
+  }
+  results[results.length - 1].toleranceTime = 0; // last one has no next crop
+
   return results;
 }
 
@@ -68,6 +81,7 @@ function renderTable(data, containerId) {
           <th>Profit/pick (flower)</th>
           <th>Time</th>
           <th>Profit/min (flower)</th>
+          <th>Tolerance Time</th>
         </tr>
       </thead>
       <tbody>
@@ -83,6 +97,7 @@ function renderTable(data, containerId) {
       <td class="profit-positive">${item.profit.toFixed(6)}</td>
       <td>${formatDHMS(item.seconds)}</td>
       <td class="profit-positive">${item.profitPerMin.toFixed(6)}</td>
+      <td>${formatDHMS(item.toleranceTime)}</td>
     </tr>`;
   });
 
