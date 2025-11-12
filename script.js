@@ -3,6 +3,20 @@ async function loadJSON(url) {
   return await res.json();
 }
 
+function formatDHMS(seconds) {
+  const d = Math.floor(seconds / 86400);
+  const h = Math.floor((seconds % 86400) / 3600);
+  const m = Math.floor((seconds % 3600) / 60);
+  const s = Math.floor(seconds % 60);
+
+  let result = "";
+  if (d > 0) result += `${d}d `;
+  if (h > 0) result += `${h}h `;
+  if (m > 0) result += `${m}m `;
+  if (s > 0 || result === "") result += `${s}s`;
+  return result.trim();
+}
+
 async function fetchMarketPrices() {
   const data = await loadJSON("prices.json");
   return data?.data?.p2p || {};
@@ -50,9 +64,9 @@ function renderTable(data, containerId) {
           <th>#</th>
           <th>Item</th>
           <th>Seed Cost (flower)</th>
-          <th>Marketplace Price (flower)</th>
+          <th>Marketplace<br>Price (flower)</th>
           <th>Profit/pick (flower)</th>
-          <th>Time (s)</th>
+          <th>Time</th>
           <th>Profit/min (flower)</th>
         </tr>
       </thead>
@@ -67,7 +81,7 @@ function renderTable(data, containerId) {
       <td>${item.seedCost.toFixed(6)}</td>
       <td>${item.sellPrice.toFixed(6)}</td>
       <td class="profit-positive">${item.profit.toFixed(6)}</td>
-      <td>${item.seconds}</td>
+      <td>${formatDHMS(item.seconds)}</td>
       <td class="profit-positive">${item.profitPerMin.toFixed(6)}</td>
     </tr>`;
   });
